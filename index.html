@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Playlist</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1db954;
+      color: white;
+      padding: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      margin: 20px;
+      padding: 20px;
+      background: #181818;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    ul.playlist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.playlist li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      border-bottom: 1px solid #333;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    ul.playlist li:hover {
+      background: #282828;
+    }
+
+    .song-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .song-info img {
+      width: 45px;
+      height: 45px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .song-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .song-title {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .song-artist {
+      font-size: 0.85rem;
+      color: #b3b3b3;
+    }
+
+    .unavailable {
+      font-size: 0.8rem;
+      color: #ff4d4d;
+      margin-left: auto;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🎵 My Playlist</header>
+
+  <div class="container">
+    <ul class="playlist" id="playlist"></ul>
+  </div>
+
+  <script>
+    const playlist = document.getElementById("playlist");
+
+    // Songs with optional link
+    const songs = [
+      { title: "तुझको मेरी परवाह नहीं", artist: "Animesh", img: "img.png", link: "https://musicforlove.github.io/music02/" },
+      { title: "For sakshi priya", artist: "Animesh", img: "img.png", link: "https://animesh-kumar-html.github.io/music/" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+       { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" }, 
+        { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" }, 
+        { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" }, 
+        { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+        { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+      { title: "Song ", artist: "Animesh", img: "img.png", link: "" },
+        
+    ];
+
+    songs.forEach(song => {
+      const li = document.createElement("li");
+
+      const songInfo = document.createElement("div");
+      songInfo.className = "song-info";
+
+      const img = document.createElement("img");
+      img.src = song.img;
+
+      const details = document.createElement("div");
+      details.className = "song-details";
+
+      const title = document.createElement("span");
+      title.className = "song-title";
+      title.textContent = song.title;
+
+      const artist = document.createElement("span");
+      artist.className = "song-artist";
+      artist.textContent = song.artist;
+
+      details.appendChild(title);
+      details.appendChild(artist);
+
+      songInfo.appendChild(img);
+      songInfo.appendChild(details);
+
+      li.appendChild(songInfo);
+
+      // Handle link or unavailable
+      if (song.link && song.link.trim() !== "") {
+        li.onclick = () => window.open(song.link, "_blank");
+      } else {
+        const unavailable = document.createElement("span");
+        unavailable.className = "unavailable";
+        unavailable.textContent = "Unavailable";
+        li.appendChild(unavailable);
+        li.style.cursor = "not-allowed";
+      }
+
+      playlist.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>
